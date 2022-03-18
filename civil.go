@@ -166,11 +166,10 @@ func ParseTime(s string) (Time, error) {
 // is zero, no fractional part will be generated. Otherwise, the result will
 // end with a fractional part consisting of a decimal point and nine digits.
 func (t Time) String() string {
-	s := fmt.Sprintf("%02d:%02d:%02d", t.Hour, t.Minute, t.Second)
 	if t.Nanosecond == 0 {
-		return s
+		return fmt.Sprintf("%02d:%02d:%02d", t.Hour, t.Minute, t.Second)
 	}
-	return s + fmt.Sprintf(".%09d", t.Nanosecond)
+	return fmt.Sprintf("%02d:%02d:%02d.%09d", t.Hour, t.Minute, t.Second, t.Nanosecond)
 }
 
 // IsValid reports whether the time is valid.
